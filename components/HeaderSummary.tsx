@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "../pages/Header";
+import SummaryComponent from "./SummaryComponent/SummaryComponent";
 
 export default function HeaderSummary() {
   return (
@@ -7,11 +8,12 @@ export default function HeaderSummary() {
       <style>
         {`
             .header-summary{
-                background: radial-gradient(ellipse at 50% 0%, #f7f7f7 0%, #fbfbff 59%, #ffffff 58.84%);
+                background: radial-gradient(ellipse at 50% 0%, #f8fafc 0%, #f8fafc 70%, #ffffff 58.84%);
             }
         `}
       </style>
       <Header></Header>
+      <SummaryComponent></SummaryComponent>
     </div>
   );
 }
