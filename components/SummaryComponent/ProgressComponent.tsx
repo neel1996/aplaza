@@ -1,11 +1,18 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import "axios";
 
 export default function ProgressComponent() {
-  const [totalProjects, setTotalProjects] = useState(0);
-  const [overdueProjects, setOverdueProjects] = useState(0);
-  const [completedProjects, setCompletedProjects] = useState(0);
+  const [projectCountStat, setProjectCountStat] = useState({
+    totalProjects: 0,
+    overdueProjects: 0,
+    completedProjects: 0,
+  });
+
+  const countLabels = [
+    "Total projects",
+    "Projects Overdue",
+    "Projects completed",
+  ];
 
   useEffect(() => {
     axios({
@@ -15,38 +22,31 @@ export default function ProgressComponent() {
         Accept: "application/json",
       },
     }).then((res) => {
-      const {
-        totalProjectCount,
-        overdueProjectCount,
-        completedProjectCount,
-      } = res.data;
-
-      setTotalProjects(totalProjectCount);
-      setOverdueProjects(overdueProjectCount);
-      setCompletedProjects(completedProjectCount);
+      setProjectCountStat({
+        ...res.data,
+      });
     });
   }, []);
 
   return (
-    <div className="flex flex-wrap my-20 mx-auto justify-between w-full p-5 border-b-2 border-dashed border-gray-300">
-      <div className="mx-auto my-6 font-sans font-semibold text-3xl text-justify text-gray-600">
-        <span className="mx-2 border-b-4 border-indigo-300">
-          {totalProjects}
-        </span>
-        Total projects
-      </div>
-      <div className="mx-auto my-6 font-sans font-semibold text-3xl text-justify text-gray-600">
-        <span className="mx-2 border-b-4 border-gray-500">
-          {overdueProjects}
-        </span>
-        Projects Overdue
-      </div>
-      <div className="mx-auto my-6 font-sans font-semibold text-3xl text-justify text-gray-600">
-        <span className="mx-2 border-b-4 border-green-400">
-          {completedProjects}
-        </span>
-        Projects completed
-      </div>
+    <div className="flex flex-wrap my-20 mx-auto justify-between w-3/4 shadow-lg rounded-lg bg-white p-5 border-b-2 border-dashed border-gray-300">
+      {projectCountStat &&
+        Object.keys(projectCountStat).map((item, idx) => {
+          const limitIndex = idx + 1;
+          return (
+            <>
+              <div className="mx-auto flex justify-between my-6 font-sans font-semibold text-3xl text-justify text-gray-600 border-dashed">
+                <div className="mx-2 border-b-4 border-indigo-300">
+                  {projectCountStat[item]}
+                </div>
+                <div className="font-light">{countLabels[idx]}</div>
+              </div>
+              {limitIndex < countLabels.length ? (
+                <div className="block border-r shadow-inner border-dashed border-gray-400"></div>
+              ) : null}
+            </>
+          );
+        })}
     </div>
   );
 }
