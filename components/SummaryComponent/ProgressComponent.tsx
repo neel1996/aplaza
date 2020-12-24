@@ -34,7 +34,7 @@ export default function ProgressComponent() {
         Object.keys(projectCountStat).map((item, idx) => {
           const limitIndex = idx + 1;
           return (
-            <>
+            <div key={item}>
               <div className="mx-auto flex justify-between my-6 font-sans font-semibold text-3xl text-justify text-gray-600 border-dashed">
                 <div className="mx-2 border-b-4 border-indigo-300">
                   {projectCountStat[item]}
@@ -44,7 +44,7 @@ export default function ProgressComponent() {
               {limitIndex < countLabels.length ? (
                 <div className="block border-r shadow-inner border-dashed border-gray-400"></div>
               ) : null}
-            </>
+            </div>
           );
         })}
     </div>
