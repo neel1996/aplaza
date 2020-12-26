@@ -10,6 +10,16 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <AplazaContext.Provider value={{ state, dispatch }}>
+      <style jsx global>
+        {
+          `
+            ::selection{
+              background: #788fa7;
+              color: #FFFFFF;
+            }
+          `
+        }
+      </style>
       <Component {...pageProps}></Component>
     </AplazaContext.Provider>
   );

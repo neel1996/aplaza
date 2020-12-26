@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import SummaryComponent from "../SummaryComponent/SummaryComponent";
 
 export default function HeaderSummary() {
+  const [showSummary, setShowSummary] = useState(false);
+
+  useEffect(() => {
+    const route = window.location.pathname;
+    if (route !== "/addproject") {
+      setShowSummary(true);
+    }
+  }, []);
+
   return (
     <div className="header-summary w-full h-auto p-10">
       <style>
@@ -13,7 +22,7 @@ export default function HeaderSummary() {
         `}
       </style>
       <Header></Header>
-      <SummaryComponent></SummaryComponent>
+      {showSummary ? <SummaryComponent></SummaryComponent> : null}
     </div>
   );
 }
