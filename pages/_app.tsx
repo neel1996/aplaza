@@ -1,7 +1,6 @@
+import Head from "next/head";
 import { useReducer } from "react";
-import AddProjectButtonComponent from "../components/AddProject/AddProjectButtonComponent";
 import { AplazaContext, initialState } from "../components/context";
-import HeaderSummary from "../components/Header/HeaderSummary";
 import { reducer } from "../global/reducer";
 import "../styles/globals.css";
 
@@ -10,15 +9,16 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <AplazaContext.Provider value={{ state, dispatch }}>
+      <Head>
+        <title>Aplaza - An AIO utility for tracking your projects</title>
+      </Head>
       <style jsx global>
-        {
-          `
-            ::selection{
-              background: #788fa7;
-              color: #FFFFFF;
-            }
-          `
-        }
+        {`
+          ::selection {
+            background: #788fa7;
+            color: #ffffff;
+          }
+        `}
       </style>
       <Component {...pageProps}></Component>
     </AplazaContext.Provider>

@@ -6,9 +6,7 @@ class AplazaDocument extends Document {
     return (
       <Html>
         <body className="bg-blue-50">
-          <Head>
-            <title>Aplaza - An AIO utility for tracking your projects</title>
-          </Head>
+          <Head></Head>
           <Main></Main>
           <NextScript></NextScript>
         </body>
