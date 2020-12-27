@@ -1,5 +1,5 @@
 export interface DataFileConnectorInterface {
   dataFilePath: string;
-  readDataFile(): string;
+  readDataFile(): Promise<string>;
   writeDataFile(newData: string): void;
 }

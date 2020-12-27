@@ -6,7 +6,6 @@ export type dbConfigType = {
 };
 
 export interface DatabaseConnectorInterface {
-  databaseConfig: dbConfigType;
-  readFromDB(): string;
+  readFromDB(): Promise<any>;
   writeToDB(newData: string): void;
 }

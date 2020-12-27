@@ -15,11 +15,21 @@ export class DataFileConnector
    * @returns string
    * @param void
    */
-  readDataFile(): string {
-    const fileData: string = fs
-      .readFileSync(this.dataFilePath)
-      .toString("utf-8");
-    return fileData;
+  async readDataFile(): Promise<string> {
+    const fileData = await fs.promises
+      .readFile(this.dataFilePath)
+      .then((res) => {
+        return res.toString("utf-8");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    if (fileData) {
+      return fileData;
+    } else {
+      return "";
+    }
   }
 
   writeDataFile(newData: string): void {
@@ -31,8 +41,8 @@ export class DataFileConnector
    * @param void
    * @returns All the projects as array
    */
-  getAllProjectData(): projectDataType[] {
-    let fileData = this.readDataFile();
+  async getAllProjectData(): Promise<projectDataType[]> {
+    let fileData = await this.readDataFile();
     let parsedData: projectDataType[] = JSON.parse(fileData);
     return parsedData;
   }
@@ -42,8 +52,8 @@ export class DataFileConnector
    * @param projectId
    * @returns the project data
    */
-  getProject(projectId: string): projectDataType {
-    let allProjectData = this.getAllProjectData();
+  async getProject(projectId: string): Promise<projectDataType> {
+    let allProjectData = await this.getAllProjectData();
     let project = allProjectData.find((project: projectDataType) => {
       if (projectId === project.projectId) {
         return true;
@@ -57,8 +67,8 @@ export class DataFileConnector
    * @param newProject
    * @returns A message with the newly added project name
    */
-  addProject(newProject: projectDataType): string {
-    let allProjectData = this.getAllProjectData();
+  async addProject(newProject: projectDataType): Promise<string> {
+    let allProjectData = await this.getAllProjectData();
     allProjectData.push(newProject);
 
     let stringifiedData = JSON.stringify(allProjectData);
@@ -66,7 +76,7 @@ export class DataFileConnector
     return `New project with ${newProject.projectName} has been added to the data store`;
   }
 
-  updateProject(projectId: string): projectDataType {
+  async updateProject(projectId: string): Promise<projectDataType> {
     throw new Error("Method not implemented.");
   }
 
@@ -75,8 +85,8 @@ export class DataFileConnector
    * @param projectId
    * @returns the deleted project data
    */
-  deleteProject(projectId: string): projectDataType {
-    let allProjectData = this.getAllProjectData();
+  async deleteProject(projectId: string): Promise<projectDataType> {
+    let allProjectData = await this.getAllProjectData();
     let deletedProject: projectDataType;
 
     let updatedProjectData = allProjectData.filter(
