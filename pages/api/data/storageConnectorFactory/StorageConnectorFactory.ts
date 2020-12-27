@@ -2,7 +2,7 @@ import { DataFileConnector } from "./dataFileConnector/DataFileConnector";
 import { DatabaseConnector } from "./dbConnector/DatabaseConnector";
 import { getStorageMode, storageMode } from "./storageConfig";
 
-export class StorageConnector {
+export class StorageConnectionFactory {
   storageMode: storageMode;
   constructor() {
     this.storageMode = getStorageMode();

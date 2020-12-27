@@ -1,14 +1,14 @@
 import fs from "fs";
 import path from "path";
+import { StorageConnectionFactory } from "./data/storageConnectorFactory/StorageConnectorFactory";
+import ProjectCountClass from "./projectCount/ProjectCountClass";
 
-export default function projectcount(req, res) {
-  const projectDataPath = path.join(
-    process.cwd(),
-    "pages/api/data/projectCountData.json"
-  );
+export default function getProjectCount(req, res) {
+  const storageConnectionFactory = new StorageConnectionFactory().getStorageConnector();
+  let allProjectData = storageConnectionFactory.getAllProjectData();
 
-  const projectDataString = fs.readFileSync(projectDataPath).toString("utf-8");
-  const projectData = JSON.parse(projectDataString);
-
-  res.json(projectData[0]);
+  const projectCountStat = new ProjectCountClass(
+    allProjectData
+  ).getProjectCountStatus();
+  res.json(projectCountStat);
 }
