@@ -43,7 +43,7 @@ export default function AddProjectForm() {
             </label>
             {formItem.showHintLabel ? (
               <div className="flex items-center align-middle justify-evenly w-1/4">
-                <div className="flex justify-center items-center text-xl w-10 h-10 rounded-full my-auto mx-auto text-center border border-dotted border-purple-500 text-purple-600 font-sans font-semibold">
+                <div className="flex justify-center items-center text-xl w-8 h-8 rounded-full my-auto mx-auto text-center border border-dashed border-purple-500 text-purple-600 font-sans font-bold">
                   !
                 </div>
                 <div className="my-4 italic font-light font-sans text-purple-600">
