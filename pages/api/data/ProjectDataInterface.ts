@@ -1,9 +1,9 @@
 import { projectDataType } from "./projectDataType";
 
 export interface ProjectDataInterface {
-  getAllProjectData(): projectDataType[];
-  getProject(projectId: string): projectDataType;
-  addProject(newProject: projectDataType): string;
-  updateProject(projectId: string): projectDataType;
-  deleteProject(projectId: string): projectDataType;
+  getAllProjectData(): Promise<projectDataType[]>;
+  getProject(projectId: string): Promise<projectDataType>;
+  addProject(newProject: projectDataType): Promise<string>;
+  updateProject(projectId: string): Promise<projectDataType>;
+  deleteProject(projectId: string): Promise<projectDataType>;
 }
