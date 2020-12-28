@@ -1,7 +1,7 @@
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import FormDate from "./FormDate";
 import FormText from "./FormText";
 import { projectDataCodes, ProjectDataType } from "./projectDataTypes";
@@ -70,6 +70,13 @@ export default function AddProjectForm(props: {
     });
   }
 
+  function clearLocalStates() {
+    setProjectName("");
+    setProjectDescription("");
+    setProjectDueDate("");
+    setProjectRepoURL("");
+  }
+
   function submitNewProject(e: FormEvent) {
     e.preventDefault();
     clearParentPropStates();
@@ -93,11 +100,11 @@ export default function AddProjectForm(props: {
           },
         })
         .then((res) => {
-          console.log(res);
           props.setSuccess({
             status: true,
             message: "Project stored successfully",
           });
+          clearLocalStates();
         })
         .catch((err) => {
           console.log(err);
@@ -105,12 +112,15 @@ export default function AddProjectForm(props: {
             status: true,
             message: "Something went wrong. Please try again!",
           });
+          clearParentPropStates();
+          clearLocalStates();
         });
     } else {
       props.setError({
         status: true,
         message: "Required fields are missing",
       });
+      clearLocalStates();
       return;
     }
   }
