@@ -8,9 +8,6 @@ export default function ProjectComponent() {
         Saved Projects
       </div>
       <ProjectCardComponent></ProjectCardComponent>
-      <ProjectCardComponent></ProjectCardComponent>
-      <ProjectCardComponent></ProjectCardComponent>
-      <ProjectCardComponent></ProjectCardComponent>
     </div>
   );
 }

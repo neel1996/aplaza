@@ -55,9 +55,10 @@ export class DatabaseConnector
       projectDescription,
       projectDueDate,
       projectRepoURL,
+      false,
     ];
-    const query = `INSERT INTO ${PG_TABLE_NAME}(project_id, project_name, project_description, project_due_date, project_repo_url) 
-    VALUES($1, $2, $3, $4, $5)`;
+    const query = `INSERT INTO ${PG_TABLE_NAME}(project_id, project_name, project_description, project_due_date, project_repo_url, is_project_complete) 
+    VALUES($1, $2, $3, $4, $5, $6)`;
 
     return await this.pgClient
       .query(query, newValue)
@@ -93,7 +94,7 @@ export class DatabaseConnector
       })
       .catch((err) => {
         console.error(err);
-        return "Error occurred while writing to DB!";
+        throw Error("Error occurred while writing to DB!");
       });
   }
 
