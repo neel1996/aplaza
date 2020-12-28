@@ -1,5 +1,3 @@
-import fs from "fs";
-import path from "path";
 import { StorageConnectionFactory } from "./data/storageConnectorFactory/StorageConnectorFactory";
 import ProjectCountClass from "./projectCount/ProjectCountClass";
 
