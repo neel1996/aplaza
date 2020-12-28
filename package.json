@@ -18,10 +18,12 @@
     "axios": "^0.21.1",
     "date-fns": "^2.16.1",
     "next": "10.0.3",
+    "pg": "^8.5.1",
     "postcss": "^8.2.1",
     "react": "17.0.1",
     "react-datepicker": "^3.3.0",
     "react-dom": "17.0.1",
+    "shortid": "^2.2.16",
     "tailwindcss": "^2.0.2"
   },
   "devDependencies": {

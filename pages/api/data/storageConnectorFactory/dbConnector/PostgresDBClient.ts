@@ -8,8 +8,6 @@ import {
 import { Client } from "pg";
 
 export class PostgresClient {
-  constructor() {}
-
   getPGClient(): Client {
     const client = new Client({
       host: PG_HOST_NAME,

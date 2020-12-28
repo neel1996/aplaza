@@ -56,15 +56,8 @@ export class DatabaseConnector
       projectDueDate,
       projectRepoURL,
     ];
-    const query = `INSERT INTO ${PG_TABLE_NAME}(
-      project_id,
-      project_name,
-      project_description,
-      project_due_date,
-      project_due_date
-      )
-      VALUES(?, ?, ?, ?, ?)
-      `;
+    const query = `INSERT INTO ${PG_TABLE_NAME}(project_id, project_name, project_description, project_due_date, project_repo_url) 
+    VALUES($1, $2, $3, $4, $5)`;
 
     return await this.pgClient
       .query(query, newValue)
@@ -74,6 +67,7 @@ export class DatabaseConnector
         }
       })
       .catch((err) => {
+        console.log(err);
         throw new Error(err);
       });
   }
