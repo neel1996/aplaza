@@ -25,7 +25,7 @@ export class DatabaseConnector
     return await this.pgClient
       .query(
         `
-          SELECT * FROM ${this.pgTable}
+          SELECT project_id, project_name, project_description, project_due_date, project_repo_url, is_project_complete FROM ${this.pgTable}
         `
       )
       .then((res) => {
@@ -33,7 +33,7 @@ export class DatabaseConnector
       })
       .catch((err) => {
         console.log(err);
-        return err;
+        throw Error(err);
       });
   }
 

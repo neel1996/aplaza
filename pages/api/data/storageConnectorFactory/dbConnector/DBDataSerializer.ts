@@ -14,6 +14,7 @@ export class DBDataSerializer {
         project_description,
         project_due_date,
         project_repo_url,
+        is_project_complete,
       } = data;
 
       return {
@@ -22,7 +23,7 @@ export class DBDataSerializer {
         projectDescription: project_description,
         projectDueDate: project_due_date,
         projectRepoURL: project_repo_url,
-        projectCompleted: false,
+        projectCompleted: is_project_complete,
       };
     });
 
