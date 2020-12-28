@@ -17,7 +17,7 @@ export default class ProjectCountClass implements ProjectCountInterface {
     return 0;
   }
   getTotalProjectCount(): number {
-    return this.projectData.length;
+    return this.projectData ? this.projectData.length : 0;
   }
 
   public getProjectCountStatus(): ProjectCountStatType {

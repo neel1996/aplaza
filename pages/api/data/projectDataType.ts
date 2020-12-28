@@ -1,5 +1,5 @@
 export type projectDataType = {
-  projectId: string;
+  projectId?: string;
   projectName: string;
   projectDescription: string;
   projectDueDate: string;
