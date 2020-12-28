@@ -4,9 +4,9 @@ import axios from "axios";
 import React, { FormEvent, useEffect, useState } from "react";
 import FormDate from "./FormDate";
 import FormText from "./FormText";
-import { projectDataCodes, ProjectDataType } from "./projectDataTypes";
-import { projectFormData } from "./projectFormData";
-import { ProjectRequestDataType } from "./projectRequestDataType";
+import { projectDataCodes, ProjectDataType } from "../projectDataTypes";
+import { projectFormData } from "../projectFormData";
+import { ProjectRequestDataType } from "../projectRequestDataType";
 
 export default function AddProjectForm(props: {
   setError: React.Dispatch<

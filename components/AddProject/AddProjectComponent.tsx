@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import HeaderSummary from "../Header/HeaderSummary";
-import AddProjectForm from "./AddProjectForm";
-import ModalComponent from "./ModalComponent";
+import AddProjectForm from "./AddProjectFormComponent/AddProjectForm";
+import ModalComponent from "./ModalComponent/ModalComponent";
 
 export default function AddProjectComponent() {
   const [error, setError] = useState({
