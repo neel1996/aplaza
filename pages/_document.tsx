@@ -5,8 +5,9 @@ class AplazaDocument extends Document {
   render() {
     return (
       <Html>
+        <Head></Head>
+
         <body className="bg-blue-50">
-          <Head></Head>
           <Main></Main>
           <NextScript></NextScript>
         </body>
