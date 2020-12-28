@@ -8,5 +8,10 @@ export type ProjectDataType = {
   type?: string;
   showHintLabel?: boolean;
   hintData?: string;
-  options?: { placeHolder?: string; pinIcon?: IconDefinition };
+  options?: {
+    placeHolder?: string;
+    pinIcon?: IconDefinition;
+    maxLength?: number;
+    required: boolean;
+  };
 };

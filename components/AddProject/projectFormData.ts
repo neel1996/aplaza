@@ -13,6 +13,8 @@ export const projectFormData: ProjectDataType[] = [
     options: {
       placeHolder: "Enter a name for your project",
       pinIcon: faSortAlphaUp,
+      maxLength: 50,
+      required: true,
     },
   },
   {
@@ -22,6 +24,8 @@ export const projectFormData: ProjectDataType[] = [
     options: {
       placeHolder: "Enter a short description for your project",
       pinIcon: faInfoCircle,
+      maxLength: 255,
+      required: true,
     },
   },
   {
@@ -37,6 +41,8 @@ export const projectFormData: ProjectDataType[] = [
     options: {
       placeHolder: "Enter the repository URL for your project",
       pinIcon: faCodeBranch,
+      maxLength: 255,
+      required: false,
     },
   },
 ];
