@@ -29,9 +29,11 @@ export class DatabaseConnector
         `
       )
       .then((res) => {
+        this.pgClient.end();
         return res;
       })
       .catch((err) => {
+        this.pgClient.end();
         console.log(err);
         throw Error(err);
       });
@@ -63,11 +65,13 @@ export class DatabaseConnector
     return await this.pgClient
       .query(query, newValue)
       .then((res) => {
+        this.pgClient.end();
         if (res.rowCount) {
           return `New`;
         }
       })
       .catch((err) => {
+        this.pgClient.end();
         console.log(err);
         throw new Error(err);
       });
