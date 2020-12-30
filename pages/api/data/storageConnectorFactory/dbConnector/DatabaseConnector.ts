@@ -1,6 +1,6 @@
 import { Client, QueryResult } from "pg";
 import { ProjectDataInterface } from "../../ProjectDataInterface";
-import { projectDataType } from "../../projectDataType";
+import { projectDataType } from "../../ProjectDataType";
 import { projectIdGenerator } from "../projectIdGenerator";
 import { DatabaseConnectorInterface } from "./DatabaseConnectorInterface";
 import { DBDataSerializer } from "./DBDataSerializer";

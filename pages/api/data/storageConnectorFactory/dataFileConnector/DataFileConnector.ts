@@ -1,8 +1,9 @@
 import fs from "fs";
-import { projectDataType } from "../../projectDataType";
+import { projectDataType } from "../../ProjectDataType";
 import { ProjectDataInterface } from "../../ProjectDataInterface";
 import { DataFileConnectorInterface } from "./DataFileConnectorInterface";
 import { DATA_FILE_PATH } from "./dataFilePath";
+import { projectIdGenerator } from "../projectIdGenerator";
 
 export class DataFileConnector
   implements DataFileConnectorInterface, ProjectDataInterface {
@@ -43,8 +44,14 @@ export class DataFileConnector
    */
   async getAllProjectData(): Promise<projectDataType[]> {
     let fileData = await this.readDataFile();
-    let parsedData: projectDataType[] = JSON.parse(fileData);
-    return parsedData;
+    let parsedData: projectDataType[];
+    try {
+      parsedData = JSON.parse(fileData);
+      return parsedData;
+    } catch (err) {
+      console.log(err);
+      return [];
+    }
   }
 
   /**
@@ -69,9 +76,12 @@ export class DataFileConnector
    */
   async addProject(newProject: projectDataType): Promise<string> {
     let allProjectData = await this.getAllProjectData();
+    newProject.projectId = projectIdGenerator();
+    newProject.projectCompleted = false;
+
     allProjectData.push(newProject);
 
-    let stringifiedData = JSON.stringify(allProjectData);
+    let stringifiedData = JSON.stringify(allProjectData, null, 2);
     this.writeDataFile(stringifiedData);
     return `New project with ${newProject.projectName} has been added to the data store`;
   }
