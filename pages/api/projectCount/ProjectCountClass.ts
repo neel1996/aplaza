@@ -1,4 +1,4 @@
-import { projectDataType } from "../data/projectDataType";
+import { projectDataType } from "../data/ProjectDataType";
 import { ProjectCountInterface } from "./ProjectCountInterface";
 import { ProjectCountStatType } from "./ProjectCountStatType";
 import { differenceInCalendarDays } from "date-fns";

@@ -1,4 +1,4 @@
-import { projectDataType } from "./projectDataType";
+import { projectDataType } from "./ProjectDataType";
 
 export interface ProjectDataInterface {
   getAllProjectData(): Promise<projectDataType[]>;
