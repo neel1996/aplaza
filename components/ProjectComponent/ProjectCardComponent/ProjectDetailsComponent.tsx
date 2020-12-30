@@ -1,5 +1,5 @@
 import React from "react";
-import ProjectInfraComponent from "./ProjectInfraComponent";
+import ProjectInfraComponent from "./ProjectInfraComponent/ProjectInfraComponent";
 import ProjectLabelComponent from "./ProjectLabelComponent";
 import ProjectTimeComponent from "./ProjectDueDateComponent/ProjectTimeComponent";
 
@@ -12,7 +12,7 @@ export default function ProjectDetailsComponent(props: {
   projectCompleted: boolean;
 }) {
   return (
-    <div className="block h-auto w-5/6 px-4 bg-white my-auto rounded-r-lg py-2">
+    <div className="block h-auto xl:w-5/6 lg:w-5/6 w-full px-4 bg-white my-auto rounded-r-lg py-2">
       <ProjectLabelComponent
         projectName={props.projectName}
         projectDescription={props.projectDescription}
@@ -20,7 +20,11 @@ export default function ProjectDetailsComponent(props: {
       <ProjectTimeComponent
         projectDueDate={props.projectDueDate}
       ></ProjectTimeComponent>
-      <ProjectInfraComponent></ProjectInfraComponent>
+      {props.projectRepoURL ? (
+        <ProjectInfraComponent
+          projectRepoURL={props.projectRepoURL}
+        ></ProjectInfraComponent>
+      ) : null}
     </div>
   );
 }

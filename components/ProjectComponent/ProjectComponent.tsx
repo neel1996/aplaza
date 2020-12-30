@@ -13,8 +13,13 @@ export default function ProjectComponent() {
       projectCompleted: boolean;
     }[]
   >([]);
+  type requestStatusType = "loading" | "error" | "done";
+  const [requestStatus, setRequestStatus] = useState<requestStatusType>(
+    "loading"
+  );
 
   useEffect(() => {
+    setRequestStatus("loading");
     axios
       .get("/api/getprojects", {
         headers: {
@@ -24,27 +29,47 @@ export default function ProjectComponent() {
       })
       .then((res) => {
         const projectData = res.data;
+        setRequestStatus("done");
         setProjectData([...projectData]);
       })
       .catch((err) => {
+        setRequestStatus("error");
         console.log(err);
       });
   });
 
   return (
     <div className="my-4 mx-6">
-      <div className="font-sans font-semibold text-3xl text-gray-800 mb-10">
-        Saved Projects
-      </div>
-      {projectData &&
-        projectData.map((data) => {
-          return (
-            <ProjectCardComponent
-              {...data}
-              key={data.projectId}
-            ></ProjectCardComponent>
-          );
-        })}
+      {projectData && projectData.length ? (
+        <>
+          <div className="mx-4 font-sans font-semibold text-3xl text-gray-800 mb-10">
+            Saved Projects
+          </div>
+          {projectData.map((data) => {
+            if (!data.projectCompleted) {
+              return (
+                <ProjectCardComponent
+                  {...data}
+                  key={data.projectId}
+                ></ProjectCardComponent>
+              );
+            }
+            return null;
+          })}
+        </>
+      ) : (
+        <div className="my-4 mx-auto text-center w-3/4 p-6 rounded-lg shadow-md bg-white text-gray-800 text-xl font-semibold font-sans border-b-2 border-dashed border-gray-500">
+          {requestStatus === "loading" ? (
+            "There are no projects in the data store"
+          ) : (
+            <>
+              {requestStatus === "error"
+                ? "Error occurred while fetching projects"
+                : null}
+            </>
+          )}
+        </div>
+      )}
     </div>
   );
 }

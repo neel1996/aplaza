@@ -10,11 +10,11 @@ export default function ProjectStatusComponent(props: {
   return (
     <>
       {diff >= 0 ? (
-        <div className="mx-4 p-2 rounded-lg shadow border border-dashed border-yellow-500 text-yellow-600 font-sans font-semibold bg-yellow-100">
+        <div className="mx-4 p-2 rounded-lg shadow border border-dashed border-yellow-500 text-yellow-600 font-sans font-semibold bg-yellow-100 xl:text-base lg:text-base text-sm">
           In-progress
         </div>
       ) : (
-        <div className="mx-4 p-2 rounded-lg shadow border border-dashed border-pink-500 text-pink-600 font-sans font-semibold bg-pink-100">
+        <div className="mx-4 p-2 rounded-lg shadow border border-dashed border-pink-500 text-pink-600 font-sans font-semibold bg-pink-100 xl:text-base lg:text-base text-sm">
           Overdue
         </div>
       )}

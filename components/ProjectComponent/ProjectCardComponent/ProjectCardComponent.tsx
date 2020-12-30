@@ -30,7 +30,7 @@ export default function ProjectCardComponent(props: {
   }, [props]);
 
   return (
-    <div className="bg-indigo-400 border-l-8 border-indigo-700 shadow-md rounded-lg mx-6 xl:w-1/2 w-2/3 my-10 transition-all cursor-pointer hover:shadow-xl">
+    <div className="bg-indigo-400 border-l-8 border-indigo-700 shadow-md rounded-lg mx-4 xl:w-1/2 lg:w-2/3 md:w-3/4 w-11/12 my-10 transition-all cursor-pointer hover:shadow-xl">
       <div className="flex justify-between items-center" key={props.projectId}>
         <ProjectLogoComponent
           projectInitial={props.projectName && props.projectName[0]}
