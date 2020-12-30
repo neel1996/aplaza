@@ -21,21 +21,25 @@ export default function ProgressComponent() {
       headers: {
         Accept: "application/json",
       },
-    }).then((res) => {
-      setProjectCountStat({
-        ...res.data,
+    })
+      .then((res) => {
+        setProjectCountStat({
+          ...res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    });
   }, []);
 
   return (
-    <div className="flex flex-wrap my-20 mx-auto justify-between w-3/4 shadow-lg rounded-lg bg-white p-5 border-b-2 border-dashed border-gray-300">
+    <div className="flex flex-wrap my-20 mx-auto justify-between w-11/12 xl:w-3/4 lg:w-5/6 shadow-lg rounded-lg bg-white p-5 border-b-2 border-dashed border-gray-300">
       {projectCountStat &&
         Object.keys(projectCountStat).map((item, idx) => {
           const limitIndex = idx + 1;
           return (
             <div key={item}>
-              <div className="mx-auto flex justify-between my-6 font-sans font-semibold text-3xl text-justify text-gray-600 border-dashed">
+              <div className="mx-auto flex justify-between my-6 font-sans text-center font-semibold text-gray-600 border-dashed text-xl xl:text-3xl lg:text-2xl">
                 <div className="mx-2 border-b-4 border-indigo-300">
                   {projectCountStat[item]}
                 </div>
