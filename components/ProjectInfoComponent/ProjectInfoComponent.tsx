@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { projectDataType } from "../../pages/api/data/ProjectDataType";
+import { projectDataType } from "./ProjectDataTypeDefenition";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import ProjectStatusComponent from "../ProjectComponent/ProjectCardComponent/ProjectDueDateComponent/ProjectStatusComponent";
