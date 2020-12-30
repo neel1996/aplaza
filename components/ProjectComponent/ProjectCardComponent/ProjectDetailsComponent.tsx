@@ -20,11 +20,9 @@ export default function ProjectDetailsComponent(props: {
       <ProjectTimeComponent
         projectDueDate={props.projectDueDate}
       ></ProjectTimeComponent>
-      {props.projectRepoURL ? (
-        <ProjectInfraComponent
-          projectRepoURL={props.projectRepoURL}
-        ></ProjectInfraComponent>
-      ) : null}
+      <ProjectInfraComponent
+        projectRepoURL={props.projectRepoURL}
+      ></ProjectInfraComponent>
     </div>
   );
 }

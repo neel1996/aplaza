@@ -7,7 +7,7 @@ import {
   IconDefinition,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 export default function ProjectRepositoryComponent(props: { repoURL: string }) {
   type remoteTypes =
@@ -15,10 +15,11 @@ export default function ProjectRepositoryComponent(props: { repoURL: string }) {
     | "gitlab"
     | "codecommit"
     | "bitbucket"
-    | "remote repo";
+    | "remote repo"
+    | "No repo"
+    | "";
 
-  const remoteRepoRef = useRef<remoteTypes>();
-  const remoteIconRef = useRef<IconDefinition>();
+  const [remoteRepo, setRemoteRepo] = useState<remoteTypes>("");
 
   useEffect(() => {
     remoteRepoDetector();
@@ -27,20 +28,22 @@ export default function ProjectRepositoryComponent(props: { repoURL: string }) {
   function remoteRepoDetector() {
     const repoUrlString = props.repoURL;
     if (repoUrlString.match(/github/gi)) {
-      remoteRepoRef.current = "github";
+      setRemoteRepo("github");
     } else if (repoUrlString.match(/gitlab/gi)) {
-      remoteRepoRef.current = "gitlab";
+      setRemoteRepo("gitlab");
     } else if (repoUrlString.match(/[codecommit]/gi)) {
-      remoteRepoRef.current = "codecommit";
+      setRemoteRepo("codecommit");
     } else if (repoUrlString.match(/bitbucket/gi)) {
-      remoteRepoRef.current = "bitbucket";
+      setRemoteRepo("bitbucket");
+    } else if (repoUrlString !== "") {
+      setRemoteRepo("remote repo");
     } else {
-      remoteRepoRef.current = "remote repo";
+      setRemoteRepo("No repo");
     }
   }
 
   function remoteIconDetector(): IconDefinition {
-    switch (remoteRepoRef.current) {
+    switch (remoteRepo) {
       case "github":
         return faGithub;
       case "gitlab":
@@ -59,7 +62,7 @@ export default function ProjectRepositoryComponent(props: { repoURL: string }) {
       <div className="text-2xl font-sans text-gray-400 mx-1">
         <FontAwesomeIcon icon={remoteIconDetector()}></FontAwesomeIcon>
       </div>
-      <div className="font-sans text-gray-400">{remoteRepoRef.current}</div>
+      <div className="font-sans text-gray-400">{remoteRepo}</div>
     </div>
   );
 }
