@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo, useState } from "react";
-import ProjectCardComponent from "./ProjectCardComponent/ProjectCardComponent";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
+import ProjectCardComponent from "./ProjectCardComponent/ProjectCardComponent";
 
 export default function ProjectComponent() {
   const [projectData, setProjectData] = useState<
@@ -13,6 +13,7 @@ export default function ProjectComponent() {
       projectCompleted: boolean;
     }[]
   >([]);
+
   type requestStatusType = "loading" | "error" | "done";
   const [requestStatus, setRequestStatus] = useState<requestStatusType>(
     "loading"
@@ -36,11 +37,11 @@ export default function ProjectComponent() {
         setRequestStatus("error");
         console.log(err);
       });
-  });
+  }, []);
 
   return (
     <div className="my-4 mx-6">
-      {projectData && projectData.length ? (
+      {requestStatus !== "loading" && projectData && projectData.length ? (
         <>
           <div className="mx-4 font-sans font-semibold text-3xl text-gray-800 mb-10">
             Saved Projects
@@ -59,15 +60,13 @@ export default function ProjectComponent() {
         </>
       ) : (
         <div className="my-4 mx-auto text-center w-3/4 p-6 rounded-lg shadow-md bg-white text-gray-800 text-xl font-semibold font-sans border-b-2 border-dashed border-gray-500">
-          {requestStatus === "loading" ? (
-            "There are no projects in the data store"
-          ) : (
-            <>
-              {requestStatus === "error"
-                ? "Error occurred while fetching projects"
-                : null}
-            </>
-          )}
+          {requestStatus === "loading" ? "Loading..." : null}
+          {requestStatus !== "loading" && projectData.length === 0
+            ? "There are no projects in the data store"
+            : null}
+          {requestStatus === "error"
+            ? "Error occurred while fetching projects"
+            : null}
         </div>
       )}
     </div>

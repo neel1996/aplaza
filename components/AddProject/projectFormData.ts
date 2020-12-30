@@ -3,9 +3,9 @@ import {
   faInfoCircle,
   faSortAlphaUp,
 } from "@fortawesome/free-solid-svg-icons";
-import { ProjectDataType } from "./projectDataTypes";
+import { ProjectFormDataType } from "./ProjectFormDataType";
 
-export const projectFormData: ProjectDataType[] = [
+export const projectFormData: ProjectFormDataType[] = [
   {
     name: "name",
     label: "Project Name",

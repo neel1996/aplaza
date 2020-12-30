@@ -7,7 +7,7 @@ export default function HeaderSummary() {
 
   useEffect(() => {
     const route = window.location.pathname;
-    if (route !== "/addproject") {
+    if (route === "/") {
       setShowSummary(true);
     }
   }, []);

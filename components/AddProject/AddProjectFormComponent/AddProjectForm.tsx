@@ -1,12 +1,12 @@
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useState } from "react";
+import { projectFormData } from "../projectFormData";
+import { projectDataCodes, ProjectFormDataType } from "../ProjectFormDataType";
+import { ProjectRequestDataType } from "../projectRequestDataType";
 import FormDate from "./FormDate";
 import FormText from "./FormText";
-import { projectDataCodes, ProjectDataType } from "../projectDataTypes";
-import { projectFormData } from "../projectFormData";
-import { ProjectRequestDataType } from "../projectRequestDataType";
 
 export default function AddProjectForm(props: {
   setError: React.Dispatch<
@@ -23,7 +23,7 @@ export default function AddProjectForm(props: {
   const [projectRepoURL, setProjectRepoURL] = useState("");
   const [projectDueDate, setProjectDueDate] = useState(new Date().toString());
 
-  function inputPicker(type: projectDataCodes, formData: ProjectDataType) {
+  function inputPicker(type: projectDataCodes, formData: ProjectFormDataType) {
     if (type === "name" || type === "description" || type === "repo") {
       let stateSetterProp: React.Dispatch<React.SetStateAction<string>>;
 
@@ -83,9 +83,10 @@ export default function AddProjectForm(props: {
 
     const formElement: HTMLFormElement = e.currentTarget.parentElement
       .parentElement as HTMLFormElement;
-    formElement.reset();
 
     if (projectName && projectDescription && projectDueDate) {
+      formElement.reset();
+
       const projectData: ProjectRequestDataType = {
         projectName,
         projectDescription,
