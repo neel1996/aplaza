@@ -1,4 +1,4 @@
-import { projectDataType } from "./data/ProjectDataType";
+import { projectDataType } from "./ProjectDataType";
 import { NextApiRequest, NextApiResponse } from "next";
 import { StorageConnectionFactory } from "./data/storageConnectorFactory/StorageConnectorFactory";
 

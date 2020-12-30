@@ -1,5 +1,5 @@
 import { StorageConnectionFactory } from "./data/storageConnectorFactory/StorageConnectorFactory";
-import { projectDataType } from "./data/ProjectDataType";
+import { projectDataType } from "./ProjectDataType";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function getProjects(

@@ -1,4 +1,4 @@
-import { projectDataType } from "../../ProjectDataType";
+import { projectDataType } from "../../../ProjectDataType";
 export type dbConfigType = {
   dbHostName: string;
   dbPort: number;

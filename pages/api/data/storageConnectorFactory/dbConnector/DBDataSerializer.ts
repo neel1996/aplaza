@@ -1,4 +1,4 @@
-import { projectDataType } from "../../ProjectDataType";
+import { projectDataType } from "../../../ProjectDataType";
 
 export class DBDataSerializer {
   rawDbData: any[];

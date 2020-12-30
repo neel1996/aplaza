@@ -1,5 +1,5 @@
 import fs from "fs";
-import { projectDataType } from "../../ProjectDataType";
+import { projectDataType } from "../../../ProjectDataType";
 import { ProjectDataInterface } from "../../ProjectDataInterface";
 import { DataFileConnectorInterface } from "./DataFileConnectorInterface";
 import { DATA_FILE_PATH } from "./dataFilePath";

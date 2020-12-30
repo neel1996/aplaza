@@ -1,9 +1,10 @@
 [
   {
-    "projectName": "",
-    "projectDescription": "",
-    "projectDueDate": "",
-    "projectRepoURL": "",
+    "projectName": "Aplaza",
+    "projectDescription": "web app for tracking projects",
+    "projectDueDate": "2021-01-09",
+    "projectRepoURL": "https://github.com/neel1996",
+    "projectId": "0UXNrzhK3",
     "projectCompleted": false
   }
 ]
