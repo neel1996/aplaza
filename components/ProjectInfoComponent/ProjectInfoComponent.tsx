@@ -63,12 +63,12 @@ export default function ProjectInfoComponent(props: { projectId: string }) {
             {projectData &&
               ProjectInfoData &&
               ProjectInfoData.map((infoData) => {
-                const { icon, label } = infoData;
+                const { icon, label, key } = infoData;
 
                 return (
                   <div
                     className="block xl:flex lg:flex items-center justify-start w-full my-6"
-                    key={label}
+                    key={key}
                   >
                     <div className="flex items-center w-full xl:w-1/3 lg:w-1/3 text-blue-300 text-3xl">
                       <div>
@@ -79,7 +79,7 @@ export default function ProjectInfoComponent(props: { projectId: string }) {
                       </div>
                     </div>
                     <div className="w-full xl:w-4/5 lg:w-4/5 my-3 xl:my-0 lg:my-0 text-xl xl:text-2xl font-light font-sans text-gray-800">
-                      {projectData.projectDescription}
+                      {projectData[key]}
                     </div>
                   </div>
                 );

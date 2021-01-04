@@ -4,9 +4,11 @@ export const ProjectInfoData = [
   {
     icon: faInfoCircle,
     label: "DESCRIPTION",
+    key: "projectDescription",
   },
   {
     icon: faCalendar,
     label: "DUE DATE",
+    key: "projectDueDate",
   },
 ];
