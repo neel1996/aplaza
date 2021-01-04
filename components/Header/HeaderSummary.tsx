@@ -13,7 +13,7 @@ export default function HeaderSummary() {
   }, []);
 
   return (
-    <div className="header-summary w-full h-auto p-10">
+    <div className="header-summary w-full h-auto xl:p-10 lg:p-8 p-5">
       <style>
         {`
             .header-summary{

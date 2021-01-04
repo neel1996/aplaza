@@ -40,7 +40,7 @@ export default function ProjectComponent() {
   }, []);
 
   return (
-    <div className="my-4 mx-6">
+    <div className="my-4 mx-6 pb-24">
       {requestStatus !== "loading" && projectData && projectData.length ? (
         <>
           <div className="mx-4 font-sans font-semibold text-3xl text-gray-800 mb-10">
