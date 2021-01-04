@@ -11,5 +11,14 @@ export default async function getProject(
   let project: projectDataType = await storageConnector.getProject(
     projectId.toString()
   );
-  res.json(project);
+
+  if (project && project.projectId) {
+    res.statusCode = 200;
+    res.json(project);
+  } else {
+    res.statusCode = 404;
+    res.json({
+      message: `${projectId} could not be found in the data store`,
+    });
+  }
 }

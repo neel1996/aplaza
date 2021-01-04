@@ -33,6 +33,10 @@ export class DataFileConnector
     }
   }
 
+  /**
+   * writes project data to the JSON data file
+   * @param newData
+   */
   writeDataFile(newData: string): void {
     fs.writeFileSync(this.dataFilePath, newData);
   }
