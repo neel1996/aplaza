@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ProjectStatusComponent from "../ProjectComponent/ProjectCardComponent/ProjectDueDateComponent/ProjectStatusComponent";
-import DeleteProjectComponent from "./DeleteProjectComponent";
+import PopupActionComponent from "./PopupActionComponent";
 import { projectDataType } from "./ProjectDataTypeDefenition";
 import { ProjectInfoData } from "./projectInfoData";
 
@@ -16,6 +16,7 @@ export default function ProjectInfoComponent(props: { projectId: string }) {
     projectRepoURL: "",
   });
   const [initiateDelete, setInitiateDelete] = useState(false);
+  const [initiateComplete, setInitiateComplete] = useState(false);
   const [fetchError, setFetchError] = useState(false);
 
   useEffect(() => {
@@ -39,8 +40,9 @@ export default function ProjectInfoComponent(props: { projectId: string }) {
     }
   }, [props.projectId]);
 
-  function setDeletePopUpState(status: false) {
+  function setPopUpState(status: false) {
     setInitiateDelete(status);
+    setInitiateComplete(status);
   }
 
   return (
@@ -94,7 +96,12 @@ export default function ProjectInfoComponent(props: { projectId: string }) {
             >
               DELETE
             </div>
-            <div className="w-1/2 cursor-pointer rounded-br-lg text-base xl:text-xl lg:text-xl text-white p-4 bg-gradient-to-t from-green-400 to-green-500 shadow-inner hover:to-green-400 font-sans font-semibold text-center">
+            <div
+              className="w-1/2 cursor-pointer rounded-br-lg text-base xl:text-xl lg:text-xl text-white p-4 bg-gradient-to-t from-green-400 to-green-500 shadow-inner hover:to-green-400 font-sans font-semibold text-center"
+              onClick={(e) => {
+                setInitiateComplete(true);
+              }}
+            >
               COMPLETED ?
             </div>
           </div>
@@ -102,10 +109,28 @@ export default function ProjectInfoComponent(props: { projectId: string }) {
       )}
 
       {initiateDelete && projectData.projectId ? (
-        <DeleteProjectComponent
+        <PopupActionComponent
           projectId={projectData.projectId}
-          setDeleteStatus={setDeletePopUpState}
-        ></DeleteProjectComponent>
+          setParentStatus={setPopUpState}
+          labelText="Are you sure you want to delete the project?"
+          apiRoute={"/api/deleteproject"}
+          failureMessage="Deletion Failed!"
+          successMessage="Project has been removed"
+          actionText="DELETE"
+          colorRange={["from-red-400", "to-red-500", "to-red-400"]}
+        ></PopupActionComponent>
+      ) : null}
+      {initiateComplete ? (
+        <PopupActionComponent
+          projectId={projectData.projectId}
+          setParentStatus={setPopUpState}
+          labelText="Are you sure you want to mark the project as complete?"
+          apiRoute={"/api/completeproject"}
+          failureMessage="Status Update Failed!"
+          successMessage="Project has been marked as complete"
+          actionText="COMPLETE"
+          colorRange={["from-green-400", "to-green-500", "to-green-400"]}
+        ></PopupActionComponent>
       ) : null}
     </div>
   );

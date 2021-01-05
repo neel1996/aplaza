@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import ProjectCardComponent from "./ProjectCardComponent/ProjectCardComponent";
+import ProjectCardComponent from "../ProjectComponent/ProjectCardComponent/ProjectCardComponent";
 
-export default function ProjectComponent() {
+export default function CompletedComponent() {
   type projectStateType = {
     projectId: string;
     projectName: string;
@@ -17,7 +17,7 @@ export default function ProjectComponent() {
   const [requestStatus, setRequestStatus] = useState<requestStatusType>(
     "loading"
   );
-  const [allComplete, setAllComplete] = useState(false);
+  const [noneComplete, setNoneComplete] = useState(false);
 
   useEffect(() => {
     setRequestStatus("loading");
@@ -31,15 +31,14 @@ export default function ProjectComponent() {
       .then((res) => {
         const projectData: projectStateType = res.data;
         setRequestStatus("done");
-        const isAllComplete = projectData.every((item) => {
+        let isAnyComplete: boolean = false;
+        isAnyComplete = projectData.some((item) => {
           if (item.projectCompleted) {
             return true;
-          } else {
-            return false;
           }
         });
 
-        setAllComplete(isAllComplete);
+        setNoneComplete(!isAnyComplete);
         setProjectData([...projectData]);
       })
       .catch((err) => {
@@ -49,17 +48,17 @@ export default function ProjectComponent() {
   }, []);
 
   return (
-    <div className="my-4 mx-6 pb-24">
+    <div className="my-20 mx-6 pb-24">
       {requestStatus !== "loading" &&
       projectData &&
       projectData.length &&
-      !allComplete ? (
+      !noneComplete ? (
         <>
           <div className="mx-4 font-sans font-semibold text-3xl text-gray-800 mb-10">
-            Saved Projects
+            Completed Projects
           </div>
           {projectData.map((data) => {
-            if (!data.projectCompleted) {
+            if (data.projectCompleted) {
               return (
                 <ProjectCardComponent
                   {...data}
@@ -75,7 +74,7 @@ export default function ProjectComponent() {
           {requestStatus === "loading" ? "Loading..." : null}
           {requestStatus !== "loading" && projectData.length === 0
             ? "There are no projects in the data store"
-            : "Click on COMPLETED to see all the projects marked as completed"}
+            : "No projects have been marked as complete"}
           {requestStatus === "error"
             ? "Error occurred while fetching projects"
             : null}
