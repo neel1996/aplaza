@@ -20,13 +20,13 @@ export default function FormText(props: {
   }
 
   return (
-    <div className="flex w-5/6 xl:w-1/2 lg:w-2/3 md:w-3/4 justify-between items-center align-middle rounded-lg shadow-sm bg-white border border-blue-100 my-2">
-      <div className="w-1/12 mx-auto my-auto rounded-l-lg text-center text-blue-500 p-4 border bg-white text-xl">
+    <div className="flex w-11/12 xl:w-1/2 lg:w-2/3 md:w-3/4 justify-between items-center align-middle rounded-lg shadow-sm bg-white border border-blue-100 my-2">
+      <div className="w-1/6 xl:w-1/12 lg:w-1/12 mx-auto my-auto rounded-l-lg text-center text-blue-500 p-4 border bg-white text-xl">
         <FontAwesomeIcon icon={pinIcon}></FontAwesomeIcon>
       </div>
-      <div className="w-11/12 h-full bg-white rounded-r-lg">
+      <div className="w-full xl:w-11/12 lg:w-11/12 h-full bg-white rounded-r-lg">
         <input
-          className="w-11/12 h-full p-4 outline-none border-none font-sans font-light text-xl text-gray-700"
+          className="w-full xl:w-11/12 lg:w-11/12 h-full p-4 outline-none border-none font-sans font-light text-base xl:text-xl lg:text-xl text-gray-700"
           type="text"
           name={inputName}
           id={inputName}

@@ -29,7 +29,7 @@ export default function ModalComponent(props: {
     <div
       className={`${
         styles.footerModal
-      } flex justify-between fixed bottom-0 right-0 w-1/4 xl:w-1/6 lg:w-1/6 mx-6 my-2 p-3 z-40 rounded-lg shadow-xl text-center bg-white border-2 border-dashed ${
+      } flex justify-between fixed bottom-0 right-0 w-3/4 xl:w-1/6 lg:w-1/6 mx-6 my-2 p-3 z-40 rounded-lg shadow-xl text-center bg-white border-2 border-dashed ${
         props.status === "success"
           ? "border-green-400  text-green-500"
           : "border-red-400  text-red-500"

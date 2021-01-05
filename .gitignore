@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 /styles/globals.css
+/pages/api/data/projectDataFile.json
 
 # testing
 /coverage

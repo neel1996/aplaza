@@ -26,8 +26,8 @@ export default function AddProjectComponent() {
         `}
       </style>
       <HeaderSummary></HeaderSummary>
-      <div className="flex flex-col w-1/2 my-10">
-        <div className="w-11/12 text-5xl mx-6 my-2 text-gray-600 font-sans font-light">
+      <div className="flex flex-col w-11/12 my-10">
+        <div className="w-11/12 text-4xl xl:text-5xl lg:text-5xl mx-6 my-2 text-gray-600 font-sans font-light">
           Add a new project
         </div>
         {error.status ? (

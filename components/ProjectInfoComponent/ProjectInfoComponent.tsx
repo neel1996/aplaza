@@ -95,7 +95,7 @@ export default function ProjectInfoComponent(props: { projectId: string }) {
               DELETE
             </div>
             <div className="w-1/2 cursor-pointer rounded-br-lg text-base xl:text-xl lg:text-xl text-white p-4 bg-gradient-to-t from-green-400 to-green-500 shadow-inner hover:to-green-400 font-sans font-semibold text-center">
-              MARK AS COMPLETE
+              COMPLETED ?
             </div>
           </div>
         </>

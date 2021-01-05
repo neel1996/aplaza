@@ -127,7 +127,7 @@ export default function AddProjectForm(props: {
   }
 
   return (
-    <form className="my-4 mx-10 xl:mx-20 lg:mx-20 w-full" method="post">
+    <form className="my-4 mx-6 xl:mx-20 lg:mx-20 w-full pb-10" method="post">
       {projectFormData.map((formItem) => {
         const { label, name } = formItem;
 
@@ -140,7 +140,7 @@ export default function AddProjectForm(props: {
               {label}
             </label>
             {formItem.showHintLabel ? (
-              <div className="flex items-center align-middle justify-between w-1/2">
+              <div className="flex items-center align-middle justify-between w-3/4 xl:w-1/2 lg:w-1/2">
                 <div className="flex justify-center items-center text-xl w-8 h-8 rounded-full my-auto mx-auto text-center border border-dashed border-purple-500 text-purple-600 font-sans font-bold">
                   !
                 </div>
@@ -157,7 +157,7 @@ export default function AddProjectForm(props: {
         <input
           type="submit"
           value="SAVE PROJECT"
-          className="w-5/6 xl:w-1/2 lg:w-2/3 md:w-3/4 my-2 font-sans text-center font-semibold text-2xl text-white bg-gradient-to-t from-indigo-500 to-indigo-300 p-3 rounded-lg shadow cursor-pointer hover:to-indigo-400 outline-none"
+          className="w-11/12 xl:w-1/2 lg:w-2/3 md:w-3/4 my-2 font-sans text-center font-semibold text-2xl text-white bg-gradient-to-t from-indigo-500 to-indigo-300 p-3 rounded-lg shadow cursor-pointer hover:to-indigo-400 outline-none"
           onClick={submitNewProject}
         />
       </div>
