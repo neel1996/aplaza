@@ -33,7 +33,7 @@ export default function ProgressComponent() {
   }, []);
 
   return (
-    <div className="flex flex-wrap my-10 xl:m-20 lg:m-14 mx-auto justify-between w-11/12 xl:w-3/4 lg:w-5/6 shadow-lg rounded-lg bg-white p-5 border-b-2 border-dashed border-gray-300">
+    <div className="flex flex-wrap my-10 mx-auto justify-between w-11/12 xl:w-3/4 lg:w-5/6 shadow-lg rounded-lg bg-white p-5 border-b-2 border-dashed border-gray-300">
       {projectCountStat &&
         Object.keys(projectCountStat).map((item, idx) => {
           const limitIndex = idx + 1;
