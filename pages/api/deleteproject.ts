@@ -5,7 +5,7 @@ export default async function deleteProject(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const projectId: string = "req.body.projectId";
+  const projectId: string = req.body.projectId;
   const storageConnector = new StorageConnectionFactory().getStorageConnector();
   const deletedProject = await storageConnector.deleteProject(projectId);
 

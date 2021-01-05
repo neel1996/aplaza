@@ -106,6 +106,7 @@ export class DataFileConnector
     let updatedProjectData = allProjectData.filter(
       (project: projectDataType) => {
         if (projectId === project.projectId) {
+          deletedProject = project;
           return false;
         }
         return true;
