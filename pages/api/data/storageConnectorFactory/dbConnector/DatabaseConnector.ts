@@ -106,9 +106,13 @@ export class DatabaseConnector
     throw new Error("Method not implemented.");
   }
 
-  updateProject(projectId: string): Promise<projectDataType> {
+  updateProject(
+    projectId: string,
+    updatedProjectPayload: projectDataType
+  ): Promise<projectDataType> {
     throw new Error("Method not implemented.");
   }
+
   deleteProject(projectId: string): Promise<projectDataType> {
     throw new Error("Method not implemented.");
   }

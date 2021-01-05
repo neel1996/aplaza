@@ -90,8 +90,30 @@ export class DataFileConnector
     return `New project with ${newProject.projectName} has been added to the data store`;
   }
 
-  async updateProject(projectId: string): Promise<projectDataType> {
-    throw new Error("Method not implemented.");
+  /**
+   * Updates an existing project
+   * @param projectId
+   * @param updatedProjectPayload
+   */
+  async updateProject(
+    projectId: string,
+    updatedProjectPayload: projectDataType
+  ): Promise<projectDataType> {
+    const existingProjectData = await this.getAllProjectData();
+    const modifiedData = existingProjectData.filter((project) => {
+      if (project.projectId === projectId) {
+        return false;
+      }
+      return true;
+    });
+
+    if (existingProjectData.length === modifiedData.length) {
+      return null;
+    }
+
+    modifiedData.push(updatedProjectPayload);
+    this.writeDataFile(JSON.stringify(modifiedData));
+    return Promise.resolve(updatedProjectPayload);
   }
 
   /**
