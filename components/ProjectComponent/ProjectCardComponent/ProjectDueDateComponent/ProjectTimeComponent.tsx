@@ -17,7 +17,7 @@ export default function ProjectTimeComponent(props: {
     } else {
       setShowStatus(true);
     }
-  });
+  }, [props.projectDueDate]);
 
   const memoizedStatusComponent = useMemo(() => {
     return (

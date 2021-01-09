@@ -10,6 +10,7 @@ export default function ProjectCardComponent(props: {
   projectDueDate: string;
   projectRepoURL: string;
   projectCompleted: boolean;
+  projectCloudOption: string;
   route: string;
 }) {
   const memoizedProjectDetailsComponent = useMemo(() => {
@@ -21,6 +22,7 @@ export default function ProjectCardComponent(props: {
         projectCompleted={props.projectCompleted}
         projectDueDate={props.projectDueDate}
         projectRepoURL={props.projectRepoURL}
+        projectCloudOption={props.projectCloudOption}
       ></ProjectDetailsComponent>
     );
   }, [props]);

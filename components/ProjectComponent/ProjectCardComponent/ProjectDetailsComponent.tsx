@@ -10,6 +10,7 @@ export default function ProjectDetailsComponent(props: {
   projectDueDate: string;
   projectRepoURL: string;
   projectCompleted: boolean;
+  projectCloudOption: string;
 }) {
   return (
     <div className="block h-auto xl:w-5/6 lg:w-5/6 w-full px-4 bg-white my-auto rounded-r-lg py-2">
@@ -22,6 +23,7 @@ export default function ProjectDetailsComponent(props: {
       ></ProjectTimeComponent>
       <ProjectInfraComponent
         projectRepoURL={props.projectRepoURL}
+        projectCloudOption={props.projectCloudOption}
       ></ProjectInfraComponent>
     </div>
   );

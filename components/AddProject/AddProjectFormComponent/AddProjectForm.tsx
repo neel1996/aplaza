@@ -6,6 +6,7 @@ import { projectFormData } from "../projectFormData";
 import { projectDataCodes, ProjectFormDataType } from "../ProjectFormDataType";
 import { ProjectRequestDataType } from "../projectRequestDataType";
 import FormDate from "./FormDate";
+import FormRadioButton from "./FormRadioButton";
 import FormText from "./FormText";
 
 export default function AddProjectForm(props: {
@@ -22,6 +23,7 @@ export default function AddProjectForm(props: {
   const [projectDescription, setProjectDescription] = useState("");
   const [projectRepoURL, setProjectRepoURL] = useState("");
   const [projectDueDate, setProjectDueDate] = useState(new Date().toString());
+  const [projectCloudOption, setProjectCloudOption] = useState("");
 
   function inputPicker(type: projectDataCodes, formData: ProjectFormDataType) {
     if (type === "name" || type === "description" || type === "repo") {
@@ -92,6 +94,7 @@ export default function AddProjectForm(props: {
         projectDescription,
         projectDueDate,
         projectRepoURL,
+        projectCloudOption,
       };
       axios
         .post("/api/addproject", projectData, {
@@ -153,6 +156,9 @@ export default function AddProjectForm(props: {
           </div>
         );
       })}
+      <FormRadioButton
+        setParentCloudOption={setProjectCloudOption}
+      ></FormRadioButton>
       <div>
         <input
           type="submit"

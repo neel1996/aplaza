@@ -4,5 +4,6 @@ export type projectDataType = {
   projectDescription: string;
   projectDueDate: string;
   projectRepoURL?: string;
+  projectCloudOption?: string;
   projectCompleted: boolean;
 };

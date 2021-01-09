@@ -3,4 +3,5 @@ export type ProjectRequestDataType = {
   projectDescription: string;
   projectDueDate: string;
   projectRepoURL?: string;
+  projectCloudOption?: string;
 };
