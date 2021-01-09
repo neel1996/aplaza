@@ -8,5 +8,12 @@ export default async function getProjects(
 ) {
   const storageConnector = new StorageConnectionFactory().getStorageConnector();
   let projects: projectDataType[] = await storageConnector.getAllProjectData();
-  res.json(projects);
+
+  if (projects && projects.length) {
+    res.json(projects);
+  } else {
+    res.json({
+      message: "No projects present in Data store",
+    });
+  }
 }

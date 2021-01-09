@@ -17,11 +17,13 @@ export default class ProjectCountClass implements ProjectCountInterface {
     let projectData = this.projectData;
     let completedCount = 0;
 
-    projectData.forEach((project) => {
-      if (project.projectCompleted) {
-        completedCount++;
-      }
-    });
+    if (projectData && projectData.length) {
+      projectData.forEach((project) => {
+        if (project.projectCompleted) {
+          completedCount++;
+        }
+      });
+    }
 
     return completedCount;
   }
@@ -33,14 +35,16 @@ export default class ProjectCountClass implements ProjectCountInterface {
     let projectData = this.projectData;
     let overdueCount = 0;
 
-    projectData.forEach((project) => {
-      let now = new Date();
-      let compareDate = new Date(project.projectDueDate);
-      let diff = differenceInCalendarDays(compareDate, now);
-      if (diff < 0) {
-        overdueCount++;
-      }
-    });
+    if (projectData && projectData.length) {
+      projectData.forEach((project) => {
+        let now = new Date();
+        let compareDate = new Date(project.projectDueDate);
+        let diff = differenceInCalendarDays(compareDate, now);
+        if (diff < 0) {
+          overdueCount++;
+        }
+      });
+    }
 
     return overdueCount;
   }
