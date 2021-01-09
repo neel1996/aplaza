@@ -1,0 +1,7 @@
+spec:
+  name: aplaza
+  services:
+  - name: aplaza
+    git:
+      branch: main
+      repo_clone_url: https://github.com/neel1996/aplaza.git

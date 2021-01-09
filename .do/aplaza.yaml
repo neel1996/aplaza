@@ -1,0 +1,19 @@
+name: aplaza
+region: nyc
+services:
+- build_command: |
+    rm pages/api/data/projectDataFile.json
+    npx tailwindcss build -o styles/globals.css
+    npm run build
+  environment_slug: node-js
+  github:
+    branch: main
+    deploy_on_push: true
+    repo: neel1996/aplaza
+  http_port: 8080
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  name: aplaza
+  routes:
+  - path: /
+  run_command: npm start
