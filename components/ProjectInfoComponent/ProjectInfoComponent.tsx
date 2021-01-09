@@ -5,6 +5,7 @@ import ProjectStatusComponent from "../ProjectComponent/ProjectCardComponent/Pro
 import PopupActionComponent from "./PopupActionComponent";
 import { projectDataType } from "./ProjectDataTypeDefenition";
 import { ProjectInfoData } from "./projectInfoData";
+import format from "date-fns/format";
 
 export default function ProjectInfoComponent(props: {
   projectId: string;
@@ -33,6 +34,11 @@ export default function ProjectInfoComponent(props: {
         })
         .then((res) => {
           if (res.data) {
+            const fetchedData = res.data as projectDataType;
+            fetchedData.projectDueDate = format(
+              new Date(fetchedData.projectDueDate),
+              "dd MMMM yyyy"
+            );
             setProjectData(res.data);
           }
         })

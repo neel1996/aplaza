@@ -30,18 +30,23 @@ export default function ProjectComponent() {
         },
       })
       .then((res) => {
-        const projectData: projectStateType = res.data;
-        setRequestStatus("done");
-        const isAllComplete = projectData.every((item) => {
-          if (item.projectCompleted) {
-            return true;
-          } else {
-            return false;
-          }
-        });
+        if (res.data && res.data.message) {
+          setRequestStatus("done");
+          setProjectData([]);
+        } else {
+          const projectData: projectStateType = res.data;
+          setRequestStatus("done");
+          const isAllComplete = projectData.every((item) => {
+            if (item.projectCompleted) {
+              return true;
+            } else {
+              return false;
+            }
+          });
 
-        setAllComplete(isAllComplete);
-        setProjectData([...projectData]);
+          setAllComplete(isAllComplete);
+          setProjectData([...projectData]);
+        }
       })
       .catch((err) => {
         setRequestStatus("error");
