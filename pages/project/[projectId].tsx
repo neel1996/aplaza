@@ -9,9 +9,12 @@ export default function ProjectPage() {
   return (
     <div>
       <HeaderSummary></HeaderSummary>
-      <ProjectInfoComponent
-        projectId={router.query.projectId && router.query.projectId.toString()}
-      ></ProjectInfoComponent>
+      {router.query.projectId && router.query.ref ? (
+        <ProjectInfoComponent
+          projectId={router.query.projectId.toString()}
+          routeRef={router.query.ref.toString()}
+        ></ProjectInfoComponent>
+      ) : null}
     </div>
   );
 }

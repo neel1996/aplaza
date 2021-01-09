@@ -62,6 +62,7 @@ export default function CompletedComponent() {
               return (
                 <ProjectCardComponent
                   {...data}
+                  route="completed"
                   key={data.projectId}
                 ></ProjectCardComponent>
               );

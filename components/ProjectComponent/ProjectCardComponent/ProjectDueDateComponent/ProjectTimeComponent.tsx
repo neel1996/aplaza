@@ -1,12 +1,24 @@
 import { faHourglassHalf } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { format, differenceInCalendarDays } from "date-fns";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import ProjectStatusComponent from "./ProjectStatusComponent";
+import { useRouter } from "next/router";
 
 export default function ProjectTimeComponent(props: {
   projectDueDate: string;
 }) {
+  const router = useRouter();
+  const [showStatus, setShowStatus] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (router.pathname === "/completed") {
+      setShowStatus(false);
+    } else {
+      setShowStatus(true);
+    }
+  });
+
   const memoizedStatusComponent = useMemo(() => {
     return (
       <ProjectStatusComponent
@@ -25,7 +37,7 @@ export default function ProjectTimeComponent(props: {
           {format(new Date(props.projectDueDate), "dd MMMM yyyy")}
         </div>
       </div>
-      {memoizedStatusComponent}
+      {showStatus ? memoizedStatusComponent : null}
     </div>
   );
 }

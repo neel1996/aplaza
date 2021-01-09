@@ -6,7 +6,10 @@ import PopupActionComponent from "./PopupActionComponent";
 import { projectDataType } from "./ProjectDataTypeDefenition";
 import { ProjectInfoData } from "./projectInfoData";
 
-export default function ProjectInfoComponent(props: { projectId: string }) {
+export default function ProjectInfoComponent(props: {
+  projectId: string;
+  routeRef: string;
+}) {
   const [projectData, setProjectData] = useState<projectDataType>({
     projectId: "",
     projectCompleted: false,
@@ -89,21 +92,25 @@ export default function ProjectInfoComponent(props: { projectId: string }) {
           </div>
           <div className="mt-10 flex w-full mx-auto justify-between items-center">
             <div
-              className="w-1/2 cursor-pointer rounded-bl-lg text-base xl:text-xl lg:text-xl text-white p-4 bg-gradient-to-t from-pink-400 to-pink-500 shadow-inner hover:to-pink-400 font-sans font-semibold text-center"
+              className={`${
+                props.routeRef === "completed" ? "w-full" : "w-1/2"
+              } cursor-pointer rounded-bl-lg text-base xl:text-xl lg:text-xl text-white p-4 bg-gradient-to-t from-pink-400 to-pink-500 shadow-inner hover:to-pink-400 font-sans font-semibold text-center`}
               onClick={(e) => {
                 setInitiateDelete(true);
               }}
             >
               DELETE
             </div>
-            <div
-              className="w-1/2 cursor-pointer rounded-br-lg text-base xl:text-xl lg:text-xl text-white p-4 bg-gradient-to-t from-green-400 to-green-500 shadow-inner hover:to-green-400 font-sans font-semibold text-center"
-              onClick={(e) => {
-                setInitiateComplete(true);
-              }}
-            >
-              COMPLETED ?
-            </div>
+            {props.routeRef !== "completed" ? (
+              <div
+                className="w-1/2 cursor-pointer rounded-br-lg text-base xl:text-xl lg:text-xl text-white p-4 bg-gradient-to-t from-green-400 to-green-500 shadow-inner hover:to-green-400 font-sans font-semibold text-center"
+                onClick={(e) => {
+                  setInitiateComplete(true);
+                }}
+              >
+                COMPLETED ?
+              </div>
+            ) : null}
           </div>
         </>
       )}

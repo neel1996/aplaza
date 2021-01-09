@@ -63,6 +63,7 @@ export default function ProjectComponent() {
               return (
                 <ProjectCardComponent
                   {...data}
+                  route="project"
                   key={data.projectId}
                 ></ProjectCardComponent>
               );
