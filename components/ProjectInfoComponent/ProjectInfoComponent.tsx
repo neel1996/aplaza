@@ -60,9 +60,11 @@ export default function ProjectInfoComponent(props: {
             <div className="text-4xl font-semibold font-sans text-gray-700">
               {projectData.projectName}
             </div>
-            <ProjectStatusComponent
-              projectDueDate={projectData.projectDueDate}
-            ></ProjectStatusComponent>
+            {props.routeRef !== "completed" ? (
+              <ProjectStatusComponent
+                projectDueDate={projectData.projectDueDate}
+              ></ProjectStatusComponent>
+            ) : null}
           </div>
           <div className="mx-5 xl:mx-14 lg:mx-14 md:mx-10 my-10">
             {projectData &&
