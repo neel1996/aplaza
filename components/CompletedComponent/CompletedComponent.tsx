@@ -9,6 +9,7 @@ export default function CompletedComponent() {
     projectDescription: string;
     projectDueDate: string;
     projectRepoURL: string;
+    projectCloudOption: string;
     projectCompleted: boolean;
   }[];
   const [projectData, setProjectData] = useState<projectStateType>([]);
