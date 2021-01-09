@@ -6,6 +6,7 @@ import { DatabaseConnectorInterface } from "./DatabaseConnectorInterface";
 import { DBDataSerializer } from "./DBDataSerializer";
 import { PG_TABLE_NAME } from "./postgresConnectionConfig";
 import { PostgresClient } from "./PostgresDBClient";
+import format from "date-fns/format";
 export class DatabaseConnector
   implements DatabaseConnectorInterface, ProjectDataInterface {
   pgClient: Client;
@@ -25,15 +26,13 @@ export class DatabaseConnector
     return await this.pgClient
       .query(
         `
-          SELECT project_id, project_name, project_description, project_due_date, project_repo_url, is_project_complete FROM ${this.pgTable}
+          SELECT project_id, project_name, project_description, project_due_date, project_repo_url, project_cloud_provider, is_project_complete FROM ${this.pgTable}
         `
       )
       .then((res) => {
-        this.pgClient.end();
         return res;
       })
       .catch((err) => {
-        this.pgClient.end();
         console.log(err);
         throw Error(err);
       });
@@ -49,6 +48,7 @@ export class DatabaseConnector
       projectDescription,
       projectDueDate,
       projectRepoURL,
+      projectCloudOption,
     } = newData;
     const projectId: string = projectIdGenerator();
     const newValue = [
@@ -57,21 +57,20 @@ export class DatabaseConnector
       projectDescription,
       projectDueDate,
       projectRepoURL,
+      projectCloudOption,
       false,
     ];
-    const query = `INSERT INTO ${PG_TABLE_NAME}(project_id, project_name, project_description, project_due_date, project_repo_url, is_project_complete) 
-    VALUES($1, $2, $3, $4, $5, $6)`;
+    const query = `INSERT INTO ${PG_TABLE_NAME}(project_id, project_name, project_description, project_due_date, project_repo_url, project_cloud_provider, is_project_complete) 
+    VALUES($1, $2, $3, $4, $5, $6, $7)`;
 
     return await this.pgClient
       .query(query, newValue)
       .then((res) => {
-        this.pgClient.end();
         if (res.rowCount) {
           return `New`;
         }
       })
       .catch((err) => {
-        this.pgClient.end();
         console.log(err);
         throw new Error(err);
       });
@@ -102,18 +101,98 @@ export class DatabaseConnector
       });
   }
 
-  getProject(projectId: string): Promise<projectDataType> {
-    throw new Error("Method not implemented.");
+  /**
+   * Fetches and returns the required project from the Database
+   * @param projectId
+   */
+  async getProject(projectId: string): Promise<projectDataType> {
+    const allProjectData = await this.getAllProjectData();
+
+    const selectedProject = allProjectData.filter((projectData) => {
+      if (projectId === projectData.projectId) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+
+    if (selectedProject && selectedProject[0]) {
+      return selectedProject[0];
+    } else {
+      return null;
+    }
   }
 
-  updateProject(
+  /**
+   * Updates a project from the Database
+   * @param projectId
+   * @param updatedProjectPayload
+   */
+  async updateProject(
     projectId: string,
     updatedProjectPayload: projectDataType
   ): Promise<projectDataType> {
-    throw new Error("Method not implemented.");
+    const convertedData = new DBDataSerializer([]).deSerializeData(
+      updatedProjectPayload
+    );
+
+    const selectedProject = await this.getProject(projectId);
+
+    if (selectedProject && selectedProject.projectId === projectId) {
+      const formattedDueDate = format(
+        new Date(convertedData.project_due_date),
+        "yyyy-MM-dd"
+      );
+
+      const query = `UPDATE ${PG_TABLE_NAME} SET 
+                      project_name='${convertedData.project_name}',
+                      project_description='${convertedData.project_description}',
+                      project_due_date='${formattedDueDate}',
+                      project_repo_url='${convertedData.project_repo_url}',
+                      is_project_complete=${convertedData.is_project_complete},
+                      project_cloud_provider='${convertedData.project_cloud_provider}'
+                     WHERE project_id='${projectId}'`;
+
+      return await this.pgClient
+        .query(query)
+        .then((res) => {
+          if (res.rows) {
+            return selectedProject;
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          return null;
+        });
+    }
   }
 
-  deleteProject(projectId: string): Promise<projectDataType> {
-    throw new Error("Method not implemented.");
+  /**
+   * Deletes a project from the DB
+   * @param projectId
+   */
+  async deleteProject(projectId: string): Promise<projectDataType> {
+    const allProjectData = await this.getAllProjectData();
+    let deletedProject;
+
+    const isProjectPresent: boolean = allProjectData.some((projectData) => {
+      if (projectId === projectData.projectId) {
+        deletedProject = projectData;
+        return true;
+      }
+    });
+
+    if (isProjectPresent && projectId) {
+      const query = `DELETE FROM ${PG_TABLE_NAME} WHERE project_id='${projectId}'`;
+      return await this.pgClient
+        .query(query)
+        .then((res) => {
+          return deletedProject;
+        })
+        .catch((err) => {
+          console.log(err);
+          return null;
+        });
+    }
   }
 }
